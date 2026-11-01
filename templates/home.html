@@ -1,12 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Homepage!</h1>
-    <p>Check out my <a href="/about/">About</a> page.</a>!</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="dm-hero py-5">
+  <div class="container py-md-4">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <p class="dm-mono text-accent small mb-2">// totally legit goods since 2026</p>
+        <h1 class="display-5 fw-bold mb-3">Contraband for the <span class="text-accent">imagination</span>.</h1>
+        <p class="lead text-muted mb-4">
+          Bottled moonlight, slightly used time machines, and other wares no reasonable shop would stock.
+          Everything here is fictional, and that's the point.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="/products/" class="btn btn-accent btn-lg">Enter the shop</a>
+          <a href="/about/" class="btn btn-outline-accent btn-lg">What is this?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="d-flex justify-content-between align-items-baseline mb-3">
+    <h2 class="h4 mb-0">Featured</h2>
+    <a href="/products/" class="small">View all →</a>
+  </div>
+
+  {% if products %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for product in products|slice:":4" %}
+        <div class="col">{% include "partials/_product_card.html" with product=product %}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="dm-empty">
+      <div class="dm-empty-icon">¯\_(ツ)_/¯</div>
+      <p class="mb-0">The shelves are empty. The supplier hasn't shown up yet.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

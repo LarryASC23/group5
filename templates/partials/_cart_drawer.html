@@ -1,0 +1,47 @@
+{% comment %}
+  Cart drawer (Bootstrap offcanvas), included on every page.
+  UI shell only for now. Uses agreed context names: cart_items, subtotal, discount,
+  discount_code, tax, total. Will be wired to static/js/cart.js once the cart
+  endpoints exist (Cart, Checkout & Orders owner).
+{% endcomment %}
+<div class="offcanvas offcanvas-end dm-offcanvas" tabindex="-1" id="cartDrawer" aria-labelledby="cartDrawerLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title dm-mono" id="cartDrawerLabel">Your stash</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body" id="cartDrawerBody">
+    {% if cart_items %}
+      <ul class="list-unstyled mb-0">
+        {% for item in cart_items %}
+          {# TODO: confirm CartItem field names with the cart owner #}
+          <li class="d-flex justify-content-between py-2 border-bottom">
+            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="dm-empty">
+        <div class="dm-empty-icon">[ ]</div>
+        <p class="mb-3">Your cart is empty. Nothing to see here… yet.</p>
+        <a href="/products/" class="btn btn-outline-accent btn-sm">Browse the shop</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="offcanvas-footer">
+    <form class="input-group input-group-sm mb-3" onsubmit="return false;">
+      <input type="text" class="form-control" placeholder="Discount code" aria-label="Discount code"
+             value="{{ discount_code|default:'' }}" disabled>
+      <button class="btn btn-outline-accent" type="submit" disabled>Apply</button>
+    </form>
+    <dl class="row small mb-2">
+      <dt class="col-6 fw-normal text-muted">Subtotal</dt><dd class="col-6 text-end mb-1">${{ subtotal|default:"0.00" }}</dd>
+      <dt class="col-6 fw-normal text-muted">Discount</dt><dd class="col-6 text-end mb-1">−${{ discount|default:"0.00" }}</dd>
+      <dt class="col-6 fw-normal text-muted">Tax (8.25%)</dt><dd class="col-6 text-end mb-1">${{ tax|default:"0.00" }}</dd>
+      <dt class="col-6">Total</dt><dd class="col-6 text-end mb-0 dm-price">${{ total|default:"0.00" }}</dd>
+    </dl>
+    <a href="/checkout/" class="btn btn-accent w-100 {% if not cart_items %}disabled{% endif %}"
+       {% if not cart_items %}aria-disabled="true" tabindex="-1"{% endif %}>Checkout</a>
+  </div>
+</div>

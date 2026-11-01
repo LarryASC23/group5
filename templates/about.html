@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-</head>
-<body>
-    <h1>Aboutpage!</h1>
-    <p>Check out my <a href="/">Homepage</a>page.</a>!</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="max-width: 46rem;">
+  <h1 class="h2 mb-3">About this <span class="text-accent">shop</span></h1>
+  <p class="text-muted">
+    Shady Shop is a parody storefront built for CS 3773 (Software Engineering) at UTSA, Fall 2026.
+    It looks like a "dark market" site, but every product is a joke and nothing is real.
+  </p>
+  <ul class="text-muted">
+    <li>All items are fictional.</li>
+    <li>Payments run in Stripe <strong>test mode</strong> only. No real money changes hands.</li>
+    <li>Built with Django, PostgreSQL, Bootstrap 5, and vanilla JavaScript.</li>
+  </ul>
+  <a href="/products/" class="btn btn-accent mt-2">Browse the shop</a>
+</section>
+{% endblock %}

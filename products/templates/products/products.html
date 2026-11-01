@@ -1,11 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-</head>
-<body>
-    <h1>Products page is working yipeeeee</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+<section class="container py-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+    <div>
+      <h1 class="h3 mb-1">The shop</h1>
+      <p class="text-muted small mb-0">
+        {% if request.GET.q %}Results for "<span class="text-accent">{{ request.GET.q }}</span>"{% else %}Everything currently on the shelf{% endif %}
+      </p>
+    </div>
+
+    {# Search + sort via GET params (?q=...&sort=price_asc|price_desc|stock). Backend filtering still needed. #}
+    <form method="get" class="d-flex gap-2" role="search">
+      <input type="search" name="q" class="form-control form-control-sm" placeholder="Search…"
+             value="{{ request.GET.q }}" aria-label="Search products">
+      <select name="sort" class="form-select form-select-sm" aria-label="Sort products" onchange="this.form.submit()">
+        <option value="" {% if not request.GET.sort %}selected{% endif %}>Sort: default</option>
+        <option value="price_asc"  {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: low → high</option>
+        <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: high → low</option>
+        <option value="stock"      {% if request.GET.sort == 'stock' %}selected{% endif %}>Availability</option>
+      </select>
+      <button type="submit" class="btn btn-sm btn-accent">Go</button>
+    </form>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
+    {% for product in products %}
+      <div class="col">{% include "partials/_product_card.html" with product=product %}</div>
+    {% empty %}
+      <div class="col-12">
+        <div class="dm-empty">
+          <div class="dm-empty-icon">404_stash_not_found</div>
+          {% if request.GET.q %}
+            <p class="mb-3">Nothing matches "{{ request.GET.q }}". Try another search.</p>
+            <a href="/products/" class="btn btn-outline-accent btn-sm">Clear search</a>
+          {% else %}
+            <p class="mb-0">No products yet. Check back after the next shipment.</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
