@@ -28,6 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Media Storage Definition
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products',  # Add the products app to the list of installed apps
+    'products', # Add the products app to the list of installed apps
+    'orders', # Add the orders app to the list of installed apps
+    "cart",# Add the cart app to the list of installed apps
 ]
 
 MIDDLEWARE = [
