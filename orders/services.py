@@ -14,7 +14,7 @@ TAX_RATE = Decimal("0.0825")
 CENT = Decimal("0.01")
 
 #decorator wraps the function in a database transaction. This transaction handles the chekout logic
-#if any error happens all potential changes to the databse are rolled back to their original states
+#if any error happens all potential changes to the database are rolled back to their original states
 #NOTE: WILL ADD MORE COMMENTS TO THIS CODE
 @transaction.atomic
 def checkout_cart(cart, discount_code=None):
@@ -134,6 +134,62 @@ def checkout_cart(cart, discount_code=None):
     cart.save(update_fields=["updated_at"])
 
     return order
+
+#this mangement service ensures that status changes are handledle gracfully and data regarding it is accurate 
+#If one inventory update fails, we don't want an order marked as cancelled while only some of its products have been restocked.
+#The transaction ensures that either all database changes succeed or none are committed.
+#Cancelled/Completed status cannot be changed
+#this function updates a product's inventory quantity and changes the status of an order.
+#NOTE: if an order is placed it uodates the cart products quantity, complete status does change product quantity
+#returns an order object with the updated order
+@transaction.atomic
+def update_order_status(order, new_status):
+    if new_status not in ("completed", "cancelled"):
+        raise ValidationError("Invalid target order status.")
+
+    # Lock the order to prevent simultaneous status updates.
+    order = Order.objects.select_for_update().get(
+        pk=order.pk
+    )
+
+    if order.status != "placed":
+        raise ValidationError(
+            "Only placed orders can change status."
+        )
+
+    if new_status == "cancelled":
+        order_items = list(
+            order.items.order_by("product_id")
+        )
+
+        # Lock product rows in a consistent order.
+        product_ids = [
+            item.product_id for item in order_items
+        ]
+
+        products = list(
+            Product.objects.select_for_update()
+            .filter(pk__in=product_ids)
+            .order_by("pk")
+        )
+
+        if len(products) != len(set(product_ids)):
+            raise ValidationError(
+                "An order product could not be found."
+            )
+        #uodates the quantity of all products in the cart if the transactionj is set to cancelled
+        for item in order_items:
+            Product.objects.filter(
+                pk=item.product_id
+            ).update(
+                quantity=F("quantity") + item.quantity
+            )
+
+    order.status = new_status
+    order.save(update_fields=["status"])
+
+    return order
+
 
 
 #Databse is 95% complete id say
