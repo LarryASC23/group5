@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% comment %}
+  Page not found. Django uses this automatically when DEBUG = False (no view or URL needed).
+  Context: request_path (the missing URL), plus the normal request context.
+{% endcomment %}
+
+{% block title %}Not found{% endblock %}
+
+{% block content %}
+<section class="container py-5 text-center dm-error">
+  <p class="dm-error-code" aria-hidden="true">404</p>
+  <p class="dm-mono small text-accent mb-2">&gt;_ cd {{ request_path|truncatechars:40 }}: no such file or directory</p>
+  <h1 class="h3 mb-2">Nothing back here</h1>
+  <p class="text-muted mb-4">This page doesn't exist, or it got moved before anyone noticed.</p>
+
+  <form method="get" action="/products/" class="d-flex gap-2 mx-auto mb-3 dm-error-search" role="search">
+    <label for="errorSearch" class="visually-hidden">Search products</label>
+    <input type="search" name="q" id="errorSearch" class="form-control" placeholder="Search the stash…">
+    <button type="submit" class="btn btn-accent">Search</button>
+  </form>
+  <div class="d-flex flex-wrap gap-2 justify-content-center">
+    <a href="/products/" class="btn btn-outline-accent btn-sm">Browse the shop</a>
+    <a href="/" class="btn btn-link btn-sm">Home</a>
+  </div>
+</section>
+{% endblock %}
