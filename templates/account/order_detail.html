@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% comment %}
+  One order at /account/orders/<id>/ (login required; the view must only return the user's own orders,
+  e.g. get_object_or_404(Order, pk=pk, user=request.user)).
+  Context used:
+    order - orders.Order: pk, created_at, status, subtotal, discount_amount, discount_code, tax, total,
+            items (OrderItem: product.name, quantity, unit_price)
+{% endcomment %}
+
+{% block title %}Order #{{ order.pk }}{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <p class="dm-mono small text-accent mb-2">&gt;_ history --show {{ order.pk }}</p>
+  <h1 class="h3 mb-4">Your account</h1>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      {% include "partials/_account_nav.html" %}
+    </div>
+
+    <div class="col-md-9">
+      <a href="/account/orders/" class="small text-muted text-decoration-none">&lsaquo; All orders</a>
+
+      <div class="d-flex flex-wrap align-items-center gap-2 mt-2 mb-3">
+        <h2 class="h5 mb-0 me-auto">Order #{{ order.pk }}</h2>
+        {% include "partials/_order_status.html" with order=order %}
+      </div>
+      <p class="small text-muted">Ordered {{ order.created_at|date:"M j, Y \a\t g:i A" }}</p>
+
+      <div class="card dm-panel">
+        <ul class="list-unstyled mb-0">
+          {% for item in order.items.all %}
+            <li class="dm-line-item">
+              <span class="min-w-0 text-truncate">{{ item.product.name }}</span>
+              <span class="small text-muted text-nowrap">{{ item.quantity }} × ${{ item.unit_price }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div class="card-body border-top">
+          <dl class="row small mb-0 dm-totals">
+            <dt class="col-6">Subtotal</dt><dd class="col-6">${{ order.subtotal }}</dd>
+            {% if order.discount_amount %}
+              <dt class="col-6">Discount{% if order.discount_code %} <span class="dm-mono">({{ order.discount_code.code }})</span>{% endif %}</dt>
+              <dd class="col-6">−${{ order.discount_amount }}</dd>
+            {% endif %}
+            <dt class="col-6">Tax</dt><dd class="col-6">${{ order.tax }}</dd>
+            <dt class="col-6 text-body fw-semibold">Total</dt><dd class="col-6 dm-price fs-6">${{ order.total }}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
