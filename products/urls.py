@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views #imports the views.py file from the current directory
 
+app_name = "products"
+
 urlpatterns = [
-    path('', views.products), #this line maps the root URL to the products view function in views.py
+    path('', views.products, name='list'), # product catalog
 
 ]
 

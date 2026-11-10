@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustrated package of DataDose">
+<defs>
+  <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#1a2933"/><stop offset="1" stop-color="#0b161d"/></linearGradient>
+  <filter id="shadow"><feGaussianBlur stdDeviation="17"/></filter>
+</defs>
+<rect width="800" height="600" fill="url(#bg)"/>
+<circle cx="671" cy="86" r="155" fill="#71d9c6" opacity=".10"/>
+<circle cx="114" cy="519" r="184" fill="#71d9c6" opacity=".07"/>
+<path d="M0 534h800" stroke="#71d9c6" stroke-opacity=".33"/>
+<ellipse cx="404" cy="541" rx="181" ry="25" fill="#000" opacity=".65" filter="url(#shadow)"/>
+<rect x="282" y="173" width="236" height="356" rx="20" fill="#dce3e6"/>
+<rect x="301" y="193" width="198" height="317" rx="12" fill="#eef1f0"/><circle cx="344" cy="260" r="32" fill="#71d9c6" stroke="#f8faf9" stroke-width="9"/><circle cx="456" cy="260" r="32" fill="#71d9c6" stroke="#f8faf9" stroke-width="9"/><circle cx="344" cy="360" r="32" fill="#71d9c6" stroke="#f8faf9" stroke-width="9"/><circle cx="456" cy="360" r="32" fill="#71d9c6" stroke="#f8faf9" stroke-width="9"/><circle cx="344" cy="460" r="32" fill="#71d9c6" stroke="#f8faf9" stroke-width="9"/><circle cx="456" cy="460" r="32" fill="#71d9c6" stroke="#f8faf9" stroke-width="9"/>
+<text x="400" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="800" fill="#f1f7f7">DATADOSE</text>
+<text x="400" y="179" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="2" fill="#f1f7f7">SHADY SHOP LABS</text>
+<text x="44" y="49" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#71d9c6">SHADY SHOP // PHARMA</text>
+<text x="44" y="569" font-family="Arial,sans-serif" font-size="13" letter-spacing="2" fill="#adbac0">FUTURE FORMULAS</text>
+<text x="755" y="569" text-anchor="end" font-family="Arial,sans-serif" font-size="11" fill="#adbac0">FICTIONAL PARODY PRODUCT</text>
+</svg>

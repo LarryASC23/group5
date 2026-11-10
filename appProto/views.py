@@ -1,11 +1,15 @@
 #views.py file for loading pages in the django project. 
 #from django.http import HttpResponse
 from django.shortcuts import render
+from products.models import Product
 
 def homepage(request):
-    #return HttpResponse("Welcome to the homepage!")
-    return render(request, 'home.html') #this line renders the homepage.html template when the homepage view is accessed.
+    products = (
+        Product.objects.filter(is_active=True)
+        .prefetch_related("categories", "sales")
+        .order_by("name")
+    )
+    return render(request, "home.html", {"products": products})
 def about(request):
-    #return HttpResponse("This is the about page.")
-     return render(request, 'about.html')
+    return render(request, "about.html")
 
