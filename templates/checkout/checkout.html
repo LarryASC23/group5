@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% comment %}
+  Checkout review screen at /checkout/ (login required). Every form on this page POSTs to /checkout/
+  with an "action" field:
+    action=apply_code   + discount_code   -> validate the code, re-render with it applied
+    action=remove_code                    -> clear the applied code
+    action=place_order  + discount_code   -> orders.services.checkout_cart(cart, discount_code)
+                                             then redirect to /checkout/complete/<order id>/
+  Context used (same names as the cart drawer):
+    cart_items     - CartItem list (product, quantity, get_total_price)
+    subtotal, discount, tax, total - Decimals, worked out the same way as checkout_cart
+    discount_code  - the applied code string, or empty
+    discount_error - optional message when a code is invalid or expired
+  Errors from checkout_cart (out of stock, etc.) should go through messages.error(...).
+{% endcomment %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <p class="dm-mono small text-accent mb-2">&gt;_ checkout</p>
+  <h1 class="h3 mb-4">Review your order</h1>
+
+  {% if cart_items %}
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card dm-panel">
+        <div class="card-body d-flex justify-content-between align-items-center border-bottom py-3">
+          <h2 class="h6 dm-mono text-muted mb-0">
+            {% with n=cart_items|length %}{{ n }} item{{ n|pluralize }}{% endwith %}
+          </h2>
+          <button type="button" class="btn btn-link btn-sm p-0" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer"
+                  aria-controls="cartDrawer">Edit cart</button>
+        </div>
+        <ul class="list-unstyled mb-0">
+          {% for item in cart_items %}
+            {% with product=item.product %}
+            {% with unit=product.get_effective_price %}
+            <li class="dm-checkout-item">
+              {% if product.image %}
+                <img src="{{ product.image.url }}" alt="" class="dm-thumb" loading="lazy">
+              {% else %}
+                <div class="dm-thumb dm-card-img-placeholder" aria-hidden="true">?</div>
+              {% endif %}
+              <div class="min-w-0 flex-grow-1">
+                <div class="text-truncate">{{ product.name }}</div>
+                <div class="small text-muted">
+                  {{ item.quantity }} ×
+                  {% if unit < product.price %}
+                    <span class="text-accent">${{ unit }}</span>
+                    <span class="dm-price-old"><span class="visually-hidden">was </span>${{ product.price }}</span>
+                  {% else %}
+                    ${{ product.price }}
+                  {% endif %}
+                </div>
+                {% if item.quantity > product.quantity %}
+                  <div class="small dm-stock-out">
+                    {% if product.quantity %}Only {{ product.quantity }} left. Lower the quantity to continue.{% else %}Sold out. Remove it to continue.{% endif %}
+                  </div>
+                {% endif %}
+              </div>
+              <span class="dm-mono text-nowrap">${{ item.get_total_price }}</span>
+            </li>
+            {% endwith %}
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card dm-panel dm-summary">
+        <div class="card-body p-4">
+          <h2 class="h6 dm-mono text-muted mb-3">Summary</h2>
+
+          {% if discount_code %}
+            <form method="post" action="/checkout/" class="dm-code-applied mb-3">
+              {% csrf_token %}
+              <span class="small">Code <span class="dm-mono text-accent">{{ discount_code }}</span> applied</span>
+              <button type="submit" name="action" value="remove_code" class="btn btn-link btn-sm p-0 text-muted">Remove</button>
+            </form>
+          {% else %}
+            <form method="post" action="/checkout/" class="mb-3" novalidate>
+              {% csrf_token %}
+              <label for="discount_code" class="form-label small">Discount code</label>
+              <div class="input-group input-group-sm has-validation">
+                <input type="text" name="discount_code" id="discount_code" maxlength="50" autocomplete="off"
+                       class="form-control dm-mono{% if discount_error %} is-invalid{% endif %}"
+                       value="{{ request.POST.discount_code|default:'' }}"
+                       {% if discount_error %}aria-describedby="discount_error"{% endif %}>
+                <button type="submit" name="action" value="apply_code" class="btn btn-outline-accent">Apply</button>
+                {% if discount_error %}
+                  <div class="invalid-feedback" id="discount_error">{{ discount_error }}</div>
+                {% endif %}
+              </div>
+            </form>
+          {% endif %}
+
+          <dl class="row small mb-3 dm-totals">
+            <dt class="col-6">Subtotal</dt><dd class="col-6">${{ subtotal }}</dd>
+            {% if discount %}
+              <dt class="col-6">Discount</dt><dd class="col-6 text-accent">−${{ discount }}</dd>
+            {% endif %}
+            <dt class="col-6">Tax (8.25%)</dt><dd class="col-6">${{ tax }}</dd>
+          </dl>
+          <div class="d-flex justify-content-between align-items-baseline border-top pt-3 mb-4">
+            <span class="fw-semibold">Total</span>
+            <span class="dm-price fs-4">${{ total }}</span>
+          </div>
+
+          <form method="post" action="/checkout/" id="placeOrderForm">
+            {% csrf_token %}
+            {% if discount_code %}<input type="hidden" name="discount_code" value="{{ discount_code }}">{% endif %}
+            <button type="submit" name="action" value="place_order" class="btn btn-accent w-100" id="placeOrderBtn">
+              Place order · ${{ total }}
+            </button>
+          </form>
+          <p class="small text-muted text-center mt-3 mb-0">Parody shop. No real money changes hands.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <div class="dm-empty">
+      <div class="dm-empty-icon">[ ]</div>
+      <p class="mb-3">Your cart is empty. Nothing to check out.</p>
+      <a href="/products/" class="btn btn-outline-accent btn-sm">Browse the shop</a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Stop double-clicks from placing the same order twice.
+  (function () {
+    var form = document.getElementById('placeOrderForm');
+    if (!form) return;
+    form.addEventListener('submit', function () {
+      var btn = document.getElementById('placeOrderBtn');
+      // Disable after the browser has read the button's name/value into the submission.
+      setTimeout(function () { btn.disabled = true; btn.textContent = 'Placing order…'; }, 0);
+    });
+  })();
+</script>
+{% endblock %}

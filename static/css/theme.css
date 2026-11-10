@@ -322,6 +322,47 @@ h1, h2, h3, .dm-mono {
 .dm-totals dt { font-weight: 400; color: var(--dm-text-muted); }
 .dm-totals dd { text-align: right; margin-bottom: 0.25rem; }
 
+/* ---------- Checkout ---------- */
+.dm-checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--dm-border);
+}
+.dm-checkout-item:last-child { border-bottom: 0; }
+
+.dm-thumb {
+  flex: 0 0 3rem;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: calc(var(--dm-radius) * 0.75);
+  border: 1px solid var(--dm-border);
+  background: var(--dm-surface-2);
+}
+
+@media (min-width: 992px) {
+  .dm-summary { position: sticky; top: 5rem; }   /* stays in view beside a long item list */
+}
+
+.dm-code-applied {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--dm-accent-dim);
+  border-radius: var(--dm-radius);
+}
+
+.dm-success-mark {
+  font-family: var(--dm-font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dm-accent);
+  margin-bottom: 0.5rem;
+}
+
 /* ---------- Alerts ---------- */
 .alert { border-radius: var(--dm-radius); }
 

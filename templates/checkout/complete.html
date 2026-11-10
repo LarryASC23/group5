@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% comment %}
+  Order confirmation at /checkout/complete/<id>/ (login required; only the user's own order:
+  get_object_or_404(Order, pk=pk, user=request.user)).
+  Context used:
+    order - orders.Order: pk, created_at, subtotal, discount_amount, discount_code, tax, total,
+            items (product.name, quantity, unit_price)
+{% endcomment %}
+
+{% block title %}Order placed{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="max-width: 36rem;">
+  <div class="text-center mb-4">
+    <div class="dm-success-mark" aria-hidden="true">[ok]</div>
+    <p class="dm-mono small text-accent mb-2">&gt;_ order --status placed</p>
+    <h1 class="h3 mb-2">Order #{{ order.pk }} placed</h1>
+    <p class="text-muted mb-0">Your stash is on its way. Nobody saw anything.</p>
+  </div>
+
+  <div class="card dm-panel mb-4">
+    <ul class="list-unstyled mb-0">
+      {% for item in order.items.all %}
+        <li class="dm-line-item">
+          <span class="min-w-0 text-truncate">{{ item.product.name }}</span>
+          <span class="small text-muted text-nowrap">{{ item.quantity }} × ${{ item.unit_price }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="card-body border-top">
+      <dl class="row small mb-0 dm-totals">
+        <dt class="col-6">Subtotal</dt><dd class="col-6">${{ order.subtotal }}</dd>
+        {% if order.discount_amount %}
+          <dt class="col-6">Discount{% if order.discount_code %} <span class="dm-mono">({{ order.discount_code.code }})</span>{% endif %}</dt>
+          <dd class="col-6">−${{ order.discount_amount }}</dd>
+        {% endif %}
+        <dt class="col-6">Tax</dt><dd class="col-6">${{ order.tax }}</dd>
+        <dt class="col-6 text-body fw-semibold">Total</dt><dd class="col-6 dm-price fs-6">${{ order.total }}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+    <a href="/account/orders/{{ order.pk }}/" class="btn btn-outline-accent">View order</a>
+    <a href="/products/" class="btn btn-accent">Keep shopping</a>
+  </div>
+</section>
+{% endblock %}
