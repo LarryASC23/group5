@@ -199,6 +199,21 @@ h1, h2, h3, .dm-mono {
 .dm-qty { max-width: 6rem; }
 .dm-description p:last-child { margin-bottom: 0; }
 
+/* ---------- Error pages (404 / 500) ---------- */
+.dm-error { max-width: 34rem; }
+.dm-error-code {
+  font-family: var(--dm-font-mono);
+  font-weight: 700;
+  font-size: clamp(4.5rem, 18vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--dm-accent);
+  text-shadow: 0 0 2rem rgba(57, 255, 136, 0.25);
+  margin-bottom: 1rem;
+}
+.dm-error-code-500 { color: var(--dm-sale); text-shadow: 0 0 2rem rgba(255, 59, 92, 0.25); }
+.dm-error-search { max-width: 22rem; }
+
 /* ---------- Hero ---------- */
 .dm-hero {
   border-bottom: 1px solid var(--dm-border);
