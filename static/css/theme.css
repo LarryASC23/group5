@@ -178,6 +178,27 @@ h1, h2, h3, .dm-mono {
 .dm-stock-low { color: var(--dm-warn); }
 .dm-stock-out { color: var(--dm-sale); }
 
+.dm-card-link { color: inherit; text-decoration: none; }
+.dm-card-link:focus-visible { outline: none; }
+.dm-card:focus-within { border-color: var(--dm-accent); }   /* keyboard focus shows on the whole card */
+
+/* ---------- Product detail ---------- */
+.dm-breadcrumb {
+  --bs-breadcrumb-divider-color: var(--dm-text-muted);
+  --bs-breadcrumb-item-active-color: var(--dm-text-muted);
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.dm-detail-img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  background: var(--dm-surface-2);
+}
+.dm-qty { max-width: 6rem; }
+.dm-description p:last-child { margin-bottom: 0; }
+
 /* ---------- Hero ---------- */
 .dm-hero {
   border-bottom: 1px solid var(--dm-border);
