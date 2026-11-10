@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% comment %}
+  Staff overview at /staff/ (staff only: @staff_member_required). Read-only: every action
+  opens the matching Django admin page, where David's admin already handles products,
+  categories, discount codes, and completing/cancelling orders.
+  Context used:
+    orders_to_fulfill   - int, Orders with status "placed"
+    orders_30d          - int, orders in the last 30 days (not cancelled)
+    revenue_30d         - Decimal, sum of total for those orders
+    active_products     - int, Product.objects.filter(is_active=True).count()
+    recent_orders       - latest ~8 Orders, .select_related('user')
+    low_stock_products  - active Products with quantity <= 5, lowest first (~8)
+{% endcomment %}
+
+{% block title %}Staff{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-end gap-3 mb-4">
+    <div>
+      <p class="dm-mono small text-accent mb-2">&gt;_ sudo dashboard</p>
+      <h1 class="h3 mb-0">Staff overview</h1>
+    </div>
+    <a href="/admin/" class="btn btn-outline-accent btn-sm align-self-start align-self-sm-auto">Open full admin</a>
+  </div>
+
+  <div class="row row-cols-2 row-cols-lg-4 g-3 mb-4">
+    <div class="col">
+      <a href="/admin/orders/order/?status__exact=placed" class="dm-stat{% if orders_to_fulfill %} dm-stat-attention{% endif %}">
+        <span class="dm-stat-label">Orders to fulfill</span>
+        <span class="dm-stat-value">{{ orders_to_fulfill|default:0 }}</span>
+        {% if orders_to_fulfill %}<span class="dm-stat-note">● Needs action</span>{% else %}<span class="dm-stat-note">All caught up</span>{% endif %}
+      </a>
+    </div>
+    <div class="col">
+      <div class="dm-stat">
+        <span class="dm-stat-label">Revenue, last 30 days</span>
+        <span class="dm-stat-value">${{ revenue_30d|default:0|floatformat:"2g" }}</span>
+        <span class="dm-stat-note">Excludes cancelled</span>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dm-stat">
+        <span class="dm-stat-label">Orders, last 30 days</span>
+        <span class="dm-stat-value">{{ orders_30d|default:0 }}</span>
+        <span class="dm-stat-note">Excludes cancelled</span>
+      </div>
+    </div>
+    <div class="col">
+      <a href="/admin/products/product/?is_active__exact=1" class="dm-stat">
+        <span class="dm-stat-label">Products on sale floor</span>
+        <span class="dm-stat-value">{{ active_products|default:0 }}</span>
+        <span class="dm-stat-note">Active listings</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card dm-panel h-100">
+        <div class="card-body d-flex justify-content-between align-items-center border-bottom py-3">
+          <h2 class="h6 dm-mono text-muted mb-0">Recent orders</h2>
+          <a href="/admin/orders/order/" class="small">All orders</a>
+        </div>
+        {% if recent_orders %}
+          <div class="table-responsive">
+            <table class="table dm-table mb-0">
+              <thead>
+                <tr><th scope="col">Order</th><th scope="col">Customer</th><th scope="col">Date</th>
+                    <th scope="col">Status</th><th scope="col" class="text-end">Total</th></tr>
+              </thead>
+              <tbody>
+                {% for order in recent_orders %}
+                  <tr>
+                    <td><a href="/admin/orders/order/{{ order.pk }}/change/" class="dm-mono">#{{ order.pk }}</a></td>
+                    <td class="text-truncate dm-cell-name">{{ order.user.username }}</td>
+                    <td class="text-nowrap text-muted">{{ order.created_at|date:"M j" }}</td>
+                    <td>{% include "partials/_order_status.html" with order=order %}</td>
+                    <td class="text-end dm-num">${{ order.total|floatformat:"2g" }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="text-muted small p-4 mb-0">No orders yet.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-lg-5 d-flex flex-column gap-4">
+      <div class="card dm-panel">
+        <div class="card-body d-flex justify-content-between align-items-center border-bottom py-3">
+          <h2 class="h6 dm-mono text-muted mb-0">Low stock</h2>
+          <a href="/admin/products/product/" class="small">All products</a>
+        </div>
+        {% if low_stock_products %}
+          <ul class="list-unstyled mb-0">
+            {% for product in low_stock_products %}
+              <li class="dm-line-item">
+                <a href="/admin/products/product/{{ product.pk }}/change/" class="min-w-0 text-truncate">{{ product.name }}</a>
+                {% if product.quantity <= 0 %}
+                  <span class="small dm-stock-out text-nowrap">Sold out</span>
+                {% else %}
+                  <span class="small dm-stock-low text-nowrap">{{ product.quantity }} left</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted small p-4 mb-0">Everything is well stocked.</p>
+        {% endif %}
+      </div>
+
+      <div class="card dm-panel">
+        <div class="card-body">
+          <h2 class="h6 dm-mono text-muted mb-3">Quick actions</h2>
+          <div class="d-grid gap-2">
+            <a href="/admin/products/product/add/" class="btn btn-accent btn-sm">Add a product</a>
+            <a href="/admin/orders/discountcode/add/" class="btn btn-outline-accent btn-sm">Create a discount code</a>
+            <a href="/admin/products/category/" class="btn btn-outline-accent btn-sm">Manage categories</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

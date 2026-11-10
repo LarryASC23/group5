@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% comment %}
+  Sign-up screen. Django has no built-in signup view, so the backend writes one that renders
+  this template with:
+    form  - UserCreationForm or a subclass (extra fields like email/first_name render automatically)
+    next  - optional, where to send the user after signing up
+  It loops over every visible field, so adding fields in forms.py needs no template change.
+{% endcomment %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+<section class="container py-5 dm-auth">
+  <div class="card dm-auth-card">
+    <div class="card-body p-4 p-sm-5">
+      <p class="dm-mono small text-accent mb-2">&gt;_ auth --register</p>
+      <h1 class="h3 mb-1">Create an account</h1>
+      <p class="text-muted small mb-4">It's a parody shop. No real names or payments needed.</p>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger small py-2" role="alert">
+          {% for error in form.non_field_errors %}<div>{{ error }}</div>{% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="post" action="/signup/" novalidate>
+        {% csrf_token %}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+
+        {% for field in form.visible_fields %}
+          {% include "partials/_form_field.html" with field=field %}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-accent w-100 mt-2">Create account</button>
+      </form>
+
+      <p class="small text-muted text-center mt-4 mb-0">
+        Already have an account? <a href="/login/{% if next %}?next={{ next|urlencode }}{% endif %}">Sign in</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% comment %}
+  Order history at /account/orders/ (login required).
+  Context used:
+    orders - the user's orders, newest first, e.g.
+             request.user.orders.order_by('-created_at').prefetch_related('items')
+  Fields used (orders.Order): pk, created_at, status / get_status_display, total, items.
+{% endcomment %}
+
+{% block title %}Order history{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <p class="dm-mono small text-accent mb-2">&gt;_ history</p>
+  <h1 class="h3 mb-4">Your account</h1>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      {% include "partials/_account_nav.html" %}
+    </div>
+
+    <div class="col-md-9">
+      <h2 class="h6 dm-mono text-muted mb-3">Order history</h2>
+
+      {% if orders %}
+        <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+          {% for order in orders %}
+            <li>
+              <a href="/account/orders/{{ order.pk }}/" class="dm-order-row">
+                <div class="min-w-0">
+                  <div class="dm-mono fw-bold">Order #{{ order.pk }}</div>
+                  <div class="small text-muted">
+                    {{ order.created_at|date:"M j, Y" }} ·
+                    {% with n=order.items.all|length %}{{ n }} item{{ n|pluralize }}{% endwith %}
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-3 ms-auto">
+                  {% include "partials/_order_status.html" with order=order %}
+                  <span class="dm-price">${{ order.total }}</span>
+                  <span class="text-muted" aria-hidden="true">&rsaquo;</span>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="dm-empty">
+          <div class="dm-empty-icon">[ ]</div>
+          <p class="mb-3">No orders yet. Your record is clean… for now.</p>
+          <a href="/products/" class="btn btn-outline-accent btn-sm">Browse the shop</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

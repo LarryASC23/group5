@@ -1,0 +1,2 @@
+{# Order status badge. Usage: {% include "partials/_order_status.html" with order=order %}  Statuses: placed, completed, cancelled #}
+<span class="badge dm-status dm-status-{{ order.status }}">{{ order.get_status_display }}</span>

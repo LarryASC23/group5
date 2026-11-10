@@ -1,0 +1,31 @@
+{% comment %}
+  Renders one Django form field in the dark theme, without needing widget classes set in forms.py.
+  Usage: {% include "partials/_form_field.html" with field=form.username %}
+  Works for text-like inputs (text, email, password, number, tel, url). Keeps the widget's
+  autocomplete/maxlength attrs, never re-fills passwords, and shows errors + help text.
+{% endcomment %}
+{% with widget=field.field.widget input_type=field.field.widget.input_type|default:"text" %}
+<div class="mb-3">
+  <label for="{{ field.id_for_label }}" class="form-label small">
+    {{ field.label }}{% if not field.field.required %} <span class="text-muted">(optional)</span>{% endif %}
+  </label>
+  <input type="{{ input_type }}"
+         name="{{ field.html_name }}"
+         id="{{ field.id_for_label }}"
+         class="form-control{% if field.errors %} is-invalid{% endif %}"
+         {% if field.value and input_type != "password" %}value="{{ field.value }}"{% endif %}
+         {% if widget.attrs.autocomplete %}autocomplete="{{ widget.attrs.autocomplete }}"{% endif %}
+         {% if widget.attrs.maxlength %}maxlength="{{ widget.attrs.maxlength }}"{% endif %}
+         {% if widget.attrs.autofocus %}autofocus{% endif %}
+         {% if field.field.required %}required{% endif %}
+         {% if field.errors %}aria-describedby="{{ field.id_for_label }}_errors"{% elif field.help_text %}aria-describedby="{{ field.id_for_label }}_help"{% endif %}>
+  {% if field.errors %}
+    <div class="invalid-feedback" id="{{ field.id_for_label }}_errors">
+      {% for error in field.errors %}<div>{{ error }}</div>{% endfor %}
+    </div>
+  {% endif %}
+  {% if field.help_text %}
+    <div class="form-text dm-help" id="{{ field.id_for_label }}_help">{{ field.help_text|safe }}</div>
+  {% endif %}
+</div>
+{% endwith %}

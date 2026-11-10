@@ -1,0 +1,14 @@
+{% comment %}
+  Side nav for the account area. Usage: {% include "partials/_account_nav.html" %}
+  Highlights the current page from request.path.
+{% endcomment %}
+{% with path=request.path %}
+<nav class="dm-account-nav" aria-label="Account">
+  <a href="/account/" class="{% if path == '/account/' %}active{% endif %}"
+     {% if path == '/account/' %}aria-current="page"{% endif %}>Profile</a>
+  <a href="/account/orders/" class="{% if path|slice:':16' == '/account/orders/' %}active{% endif %}"
+     {% if path|slice:':16' == '/account/orders/' %}aria-current="page"{% endif %}>Order history</a>
+  <a href="/account/password/" class="{% if path|slice:':18' == '/account/password/' %}active{% endif %}"
+     {% if path|slice:':18' == '/account/password/' %}aria-current="page"{% endif %}>Password</a>
+</nav>
+{% endwith %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% comment %}
+  Account / profile screen at /account/ (login required).
+  Context used:
+    user  - from the auth context processor (username, first_name, last_name, email, date_joined)
+    form  - optional. A form for editing the profile, e.g. a ModelForm on User with
+            fields = ['first_name', 'last_name', 'email']. POSTs to /account/.
+            If no form is passed, the page shows the details read-only.
+  On a successful save, the view should redirect back here with messages.success(...).
+{% endcomment %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <p class="dm-mono small text-accent mb-2">&gt;_ whoami</p>
+  <h1 class="h3 mb-4">Your account</h1>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      {% include "partials/_account_nav.html" %}
+    </div>
+
+    <div class="col-md-9">
+      <div class="card dm-panel mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="dm-avatar" aria-hidden="true">{{ user.username|first|upper }}</div>
+            <div class="min-w-0">
+              <h2 class="h5 mb-0 text-truncate">{{ user.get_full_name|default:user.username }}</h2>
+              <p class="small text-muted mb-0 text-truncate">@{{ user.username }} · member since {{ user.date_joined|date:"M Y" }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card dm-panel">
+        <div class="card-body p-4">
+          <h2 class="h6 dm-mono text-muted mb-3">Profile details</h2>
+
+          {% if form %}
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger small py-2" role="alert">
+                {% for error in form.non_field_errors %}<div>{{ error }}</div>{% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="post" action="/account/" novalidate class="dm-form-narrow">
+              {% csrf_token %}
+              {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+              {% for field in form.visible_fields %}
+                {% include "partials/_form_field.html" with field=field %}
+              {% endfor %}
+              <button type="submit" class="btn btn-accent">Save changes</button>
+            </form>
+          {% else %}
+            <dl class="row mb-0 dm-details">
+              <dt class="col-sm-4">Username</dt>
+              <dd class="col-sm-8">{{ user.username }}</dd>
+              <dt class="col-sm-4">Name</dt>
+              <dd class="col-sm-8">{{ user.get_full_name|default:"—" }}</dd>
+              <dt class="col-sm-4">Email</dt>
+              <dd class="col-sm-8">{{ user.email|default:"—" }}</dd>
+            </dl>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -178,6 +178,27 @@ h1, h2, h3, .dm-mono {
 .dm-stock-low { color: var(--dm-warn); }
 .dm-stock-out { color: var(--dm-sale); }
 
+.dm-card-link { color: inherit; text-decoration: none; }
+.dm-card-link:focus-visible { outline: none; }
+.dm-card:focus-within { border-color: var(--dm-accent); }   /* keyboard focus shows on the whole card */
+
+/* ---------- Product detail ---------- */
+.dm-breadcrumb {
+  --bs-breadcrumb-divider-color: var(--dm-text-muted);
+  --bs-breadcrumb-item-active-color: var(--dm-text-muted);
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.dm-detail-img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  background: var(--dm-surface-2);
+}
+.dm-qty { max-width: 6rem; }
+.dm-description p:last-child { margin-bottom: 0; }
+
 /* ---------- Error pages (404 / 500) ---------- */
 .dm-error { max-width: 34rem; }
 .dm-error-code {
@@ -226,6 +247,195 @@ h1, h2, h3, .dm-mono {
   border-top: 1px solid var(--dm-border);
   padding: 1rem;
 }
+
+/* ---------- Auth (sign in / sign up) ---------- */
+.dm-auth { max-width: 28rem; }
+.dm-auth-card {
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+}
+.form-label { color: var(--dm-text); }
+.form-control.is-invalid { border-color: var(--dm-sale); }
+.form-control.is-invalid:focus { box-shadow: 0 0 0 0.2rem rgba(255, 59, 92, 0.2); }
+.invalid-feedback { color: var(--dm-sale); }
+.dm-help { color: var(--dm-text-muted); font-size: 0.8rem; }
+.dm-help ul { padding-left: 1.1rem; margin: 0.25rem 0 0; }
+
+/* ---------- Account area ---------- */
+.dm-panel {
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+}
+.dm-form-narrow { max-width: 26rem; }
+.min-w-0 { min-width: 0; }
+
+.dm-avatar {
+  flex: 0 0 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--dm-font-mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+  background: var(--dm-surface-2);
+  border: 1px solid var(--dm-accent-dim);
+  color: var(--dm-accent);
+}
+
+.dm-details dt { font-weight: 400; color: var(--dm-text-muted); }
+.dm-details dd { overflow-wrap: anywhere; }
+
+.dm-account-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.dm-account-nav a {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--dm-radius);
+  border-left: 2px solid transparent;
+  color: var(--dm-text-muted);
+  text-decoration: none;
+}
+.dm-account-nav a:hover { color: var(--dm-text); background: var(--dm-surface); }
+.dm-account-nav a.active {
+  color: var(--dm-accent);
+  background: var(--dm-surface);
+  border-left-color: var(--dm-accent);
+}
+/* On phones the side nav becomes a horizontal row of tabs */
+@media (max-width: 767.98px) {
+  .dm-account-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--dm-border);
+  }
+  .dm-account-nav a {
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+  }
+  .dm-account-nav a.active { border-bottom-color: var(--dm-accent); background: transparent; }
+}
+
+/* ---------- Orders ---------- */
+.dm-order-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+.dm-order-row:hover { border-color: var(--dm-accent-dim); color: var(--dm-text); }
+
+.dm-status { font-weight: 500; border: 1px solid; background: transparent; }
+.dm-status-placed    { color: var(--dm-warn);       border-color: var(--dm-warn); }
+.dm-status-completed { color: var(--dm-accent);     border-color: var(--dm-accent-dim); }
+.dm-status-cancelled { color: var(--dm-text-muted); border-color: var(--dm-border); }
+
+.dm-line-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--dm-border);
+}
+.dm-line-item:last-child { border-bottom: 0; }
+
+.dm-totals dt { font-weight: 400; color: var(--dm-text-muted); }
+.dm-totals dd { text-align: right; margin-bottom: 0.25rem; }
+
+/* ---------- Checkout ---------- */
+.dm-checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--dm-border);
+}
+.dm-checkout-item:last-child { border-bottom: 0; }
+
+.dm-thumb {
+  flex: 0 0 3rem;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: calc(var(--dm-radius) * 0.75);
+  border: 1px solid var(--dm-border);
+  background: var(--dm-surface-2);
+}
+
+@media (min-width: 992px) {
+  .dm-summary { position: sticky; top: 5rem; }   /* stays in view beside a long item list */
+}
+
+.dm-code-applied {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--dm-accent-dim);
+  border-radius: var(--dm-radius);
+}
+
+.dm-success-mark {
+  font-family: var(--dm-font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dm-accent);
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Staff dashboard ---------- */
+.dm-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+  text-decoration: none;
+}
+a.dm-stat:hover { border-color: var(--dm-accent-dim); color: var(--dm-text); }
+.dm-stat-label { font-size: 0.8rem; color: var(--dm-text-muted); }
+.dm-stat-value {
+  font-family: var(--dm-font-body);
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.dm-stat-note { font-size: 0.75rem; color: var(--dm-text-muted); }
+.dm-stat-attention { border-color: var(--dm-warn); }
+.dm-stat-attention .dm-stat-note { color: var(--dm-warn); }
+
+.dm-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--dm-text);
+  --bs-table-border-color: var(--dm-border);
+  font-size: 0.875rem;
+}
+.dm-table th { font-weight: 500; color: var(--dm-text-muted); white-space: nowrap; }
+.dm-table td, .dm-table th { padding: 0.65rem 1.25rem; vertical-align: middle; }
+.dm-table tbody tr:last-child td { border-bottom: 0; }
+.dm-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dm-cell-name { max-width: 10rem; }
 
 /* ---------- Alerts ---------- */
 .alert { border-radius: var(--dm-radius); }
