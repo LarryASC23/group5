@@ -384,6 +384,44 @@ h1, h2, h3, .dm-mono {
   margin-bottom: 0.5rem;
 }
 
+/* ---------- Staff dashboard ---------- */
+.dm-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+  text-decoration: none;
+}
+a.dm-stat:hover { border-color: var(--dm-accent-dim); color: var(--dm-text); }
+.dm-stat-label { font-size: 0.8rem; color: var(--dm-text-muted); }
+.dm-stat-value {
+  font-family: var(--dm-font-body);
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.dm-stat-note { font-size: 0.75rem; color: var(--dm-text-muted); }
+.dm-stat-attention { border-color: var(--dm-warn); }
+.dm-stat-attention .dm-stat-note { color: var(--dm-warn); }
+
+.dm-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--dm-text);
+  --bs-table-border-color: var(--dm-border);
+  font-size: 0.875rem;
+}
+.dm-table th { font-weight: 500; color: var(--dm-text-muted); white-space: nowrap; }
+.dm-table td, .dm-table th { padding: 0.65rem 1.25rem; vertical-align: middle; }
+.dm-table tbody tr:last-child td { border-bottom: 0; }
+.dm-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dm-cell-name { max-width: 10rem; }
+
 /* ---------- Alerts ---------- */
 .alert { border-radius: var(--dm-radius); }
 
