@@ -227,6 +227,68 @@ h1, h2, h3, .dm-mono {
 .dm-help { color: var(--dm-text-muted); font-size: 0.8rem; }
 .dm-help ul { padding-left: 1.1rem; margin: 0.25rem 0 0; }
 
+/* ---------- Account area ---------- */
+.dm-panel {
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+}
+.dm-form-narrow { max-width: 26rem; }
+.min-w-0 { min-width: 0; }
+
+.dm-avatar {
+  flex: 0 0 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--dm-font-mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+  background: var(--dm-surface-2);
+  border: 1px solid var(--dm-accent-dim);
+  color: var(--dm-accent);
+}
+
+.dm-details dt { font-weight: 400; color: var(--dm-text-muted); }
+.dm-details dd { overflow-wrap: anywhere; }
+
+.dm-account-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.dm-account-nav a {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--dm-radius);
+  border-left: 2px solid transparent;
+  color: var(--dm-text-muted);
+  text-decoration: none;
+}
+.dm-account-nav a:hover { color: var(--dm-text); background: var(--dm-surface); }
+.dm-account-nav a.active {
+  color: var(--dm-accent);
+  background: var(--dm-surface);
+  border-left-color: var(--dm-accent);
+}
+/* On phones the side nav becomes a horizontal row of tabs */
+@media (max-width: 767.98px) {
+  .dm-account-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--dm-border);
+  }
+  .dm-account-nav a {
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+  }
+  .dm-account-nav a.active { border-bottom-color: var(--dm-accent); background: transparent; }
+}
+
 /* ---------- Alerts ---------- */
 .alert { border-radius: var(--dm-radius); }
 
