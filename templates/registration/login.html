@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% comment %}
+  Sign-in screen. Lives at registration/login.html, which is the default template for
+  Django's built-in LoginView, so the backend only needs:
+    path('login/', auth_views.LoginView.as_view(), name='login')
+  Context used: form (AuthenticationForm: username, password), next.
+{% endcomment %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block content %}
+<section class="container py-5 dm-auth">
+  <div class="card dm-auth-card">
+    <div class="card-body p-4 p-sm-5">
+      <p class="dm-mono small text-accent mb-2">&gt;_ auth --login</p>
+      <h1 class="h3 mb-1">Welcome back</h1>
+      <p class="text-muted small mb-4">Sign in to check out and see your order history.</p>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger small py-2" role="alert">
+          {% for error in form.non_field_errors %}<div>{{ error }}</div>{% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="post" action="/login/" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+
+        {% include "partials/_form_field.html" with field=form.username %}
+        {% include "partials/_form_field.html" with field=form.password %}
+
+        <button type="submit" class="btn btn-accent w-100 mt-2">Sign in</button>
+      </form>
+
+      <p class="small text-muted text-center mt-4 mb-0">
+        New here? <a href="/signup/{% if next %}?next={{ next|urlencode }}{% endif %}">Create an account</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

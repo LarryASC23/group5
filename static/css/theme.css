@@ -212,6 +212,21 @@ h1, h2, h3, .dm-mono {
   padding: 1rem;
 }
 
+/* ---------- Auth (sign in / sign up) ---------- */
+.dm-auth { max-width: 28rem; }
+.dm-auth-card {
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: var(--dm-radius);
+  color: var(--dm-text);
+}
+.form-label { color: var(--dm-text); }
+.form-control.is-invalid { border-color: var(--dm-sale); }
+.form-control.is-invalid:focus { box-shadow: 0 0 0 0.2rem rgba(255, 59, 92, 0.2); }
+.invalid-feedback { color: var(--dm-sale); }
+.dm-help { color: var(--dm-text-muted); font-size: 0.8rem; }
+.dm-help ul { padding-left: 1.1rem; margin: 0.25rem 0 0; }
+
 /* ---------- Alerts ---------- */
 .alert { border-radius: var(--dm-radius); }
 
