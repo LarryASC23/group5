@@ -4,7 +4,7 @@
   and get_effective_price() for the best active Sale price.
   The view should only pass active products (is_active=True) and should
   prefetch_related('categories', 'sales') to avoid extra queries per card.
-  Not possible yet: detail page link (no product detail view/URL).
+  The whole card links to /products/<id>/ (stretched link on the name).
 {% endcomment %}
 {% with sale_price=product.get_effective_price %}
 <div class="card dm-card h-100">
@@ -32,7 +32,9 @@
         </div>
       {% endif %}
     {% endwith %}
-    <h3 class="h6 card-title mb-1">{{ product.name }}</h3>
+    <h3 class="h6 card-title mb-1">
+      <a href="/products/{{ product.pk }}/" class="stretched-link dm-card-link">{{ product.name }}</a>
+    </h3>
     <p class="card-text small text-muted mb-3">{{ product.description|truncatechars:80 }}</p>
 
     <div class="mt-auto d-flex justify-content-between align-items-end gap-2">

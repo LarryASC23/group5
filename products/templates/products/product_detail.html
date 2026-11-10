@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% comment %}
+  Product detail at /products/<id>/.
+  Context used:
+    product          - an active Product (404 if missing or is_active=False):
+                       name, description, price, quantity, image, categories, get_effective_price
+    related_products - optional, a few other active products (e.g. same category) shown as cards
+  Add to cart POSTs to /cart/add/<id>/ with:
+    quantity - 1..product.quantity
+    next     - this page's path, so the view can redirect back (with messages.success / messages.error)
+  Signed-out users see a "Sign in to buy" button instead (the cart belongs to a user).
+{% endcomment %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+{% with sale_price=product.get_effective_price %}
+<section class="container py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small mb-0 dm-breadcrumb">
+      <li class="breadcrumb-item"><a href="/products/">Shop</a></li>
+      <li class="breadcrumb-item active text-truncate" aria-current="page">{{ product.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="row g-4 g-lg-5">
+    <div class="col-md-6">
+      <div class="position-relative">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="dm-detail-img w-100">
+        {% else %}
+          <div class="dm-detail-img dm-card-img-placeholder w-100">no image</div>
+        {% endif %}
+        {% if sale_price and sale_price < product.price %}
+          <span class="badge dm-badge-sale dm-mono position-absolute top-0 start-0 m-3 fs-6">SALE</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      {% with cats=product.categories.all %}
+        {% if cats %}
+          <div class="d-flex flex-wrap gap-1 mb-2">
+            {% for cat in cats %}<span class="badge dm-badge-category">{{ cat.name }}</span>{% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <h1 class="h2 mb-3">{{ product.name }}</h1>
+
+      <div class="d-flex align-items-baseline gap-2 mb-2">
+        {% if sale_price and sale_price < product.price %}
+          <span class="dm-price fs-2">${{ sale_price }}</span>
+          <span class="dm-price-old fs-5"><span class="visually-hidden">was </span>${{ product.price }}</span>
+        {% else %}
+          <span class="dm-price fs-2">${{ product.price }}</span>
+        {% endif %}
+      </div>
+
+      {% if product.quantity > 0 %}
+        <p class="small mb-4">
+          {% if product.quantity <= 5 %}
+            <span class="dm-stock-low">Only {{ product.quantity }} left</span>
+          {% else %}
+            <span class="dm-stock-ok">{{ product.quantity }} in stock</span>
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% if product.quantity <= 0 %}
+        <button type="button" class="btn btn-accent btn-lg w-100 mb-4" disabled>Sold out</button>
+      {% elif user.is_authenticated %}
+        <form method="post" action="/cart/add/{{ product.pk }}/" class="d-flex gap-2 mb-4">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <label for="qty" class="visually-hidden">Quantity</label>
+          <input type="number" name="quantity" id="qty" value="1" min="1" max="{{ product.quantity }}"
+                 inputmode="numeric" class="form-control form-control-lg dm-qty" required>
+          <button type="submit" class="btn btn-accent btn-lg flex-grow-1">Add to cart</button>
+        </form>
+      {% else %}
+        <a href="/login/?next={{ request.path|urlencode }}" class="btn btn-outline-accent btn-lg w-100 mb-4">Sign in to buy</a>
+      {% endif %}
+
+      <h2 class="h6 dm-mono text-muted">Description</h2>
+      <div class="text-muted dm-description">{{ product.description|linebreaks }}</div>
+    </div>
+  </div>
+
+  {% if related_products %}
+    <h2 class="h5 mt-5 mb-3">You might also like</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for p in related_products %}
+        <div class="col">{% include "partials/_product_card.html" with product=p %}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+{% endwith %}
+{% endblock %}
