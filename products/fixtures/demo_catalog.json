@@ -1,0 +1,538 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "drug",
+    "description": "bad"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Paperwork Relief",
+    "description": "Parody products for the bureaucracy of modern care."
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Premium Placebos",
+    "description": "Imaginary remedies with premium packaging."
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "name": "Executive Wellness",
+    "description": "Fictional boardroom wellness essentials."
+  }
+},
+{
+  "model": "products.category",
+  "pk": 5,
+  "fields": {
+    "name": "Lifestyle Rx",
+    "description": "Satirical everyday lifestyle products."
+  }
+},
+{
+  "model": "products.category",
+  "pk": 6,
+  "fields": {
+    "name": "Brand Therapy",
+    "description": "Imaginary products from the marketing department."
+  }
+},
+{
+  "model": "products.category",
+  "pk": 7,
+  "fields": {
+    "name": "Future Formulas",
+    "description": "Speculative science-fiction pharmacy goods."
+  }
+},
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "name": "breaking bad methylamine",
+    "description": "bad pee",
+    "price": "100.00",
+    "quantity": 5,
+    "image": "products/demo-001.svg",
+    "is_active": true,
+    "categories": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "name": "meth",
+    "description": "rock candy",
+    "price": "50000.00",
+    "quantity": 6,
+    "image": "products/demo-002.svg",
+    "is_active": true,
+    "categories": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "name": "CopayCalm",
+    "description": "A tiny bottle of patience for the moment you see the copay. Entirely fictional.",
+    "price": "39.99",
+    "quantity": 42,
+    "image": "products/demo-003.svg",
+    "is_active": true,
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "name": "PriorAuth Plus",
+    "description": "For the brave soul entering page seven of the approval form. Parody only.",
+    "price": "89.00",
+    "quantity": 18,
+    "image": "products/demo-004.svg",
+    "is_active": true,
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "name": "ClaimBalm",
+    "description": "A soothing imaginary balm for claims marked pending indefinitely.",
+    "price": "24.50",
+    "quantity": 27,
+    "image": "products/demo-005.svg",
+    "is_active": true,
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "name": "RedTape Relief",
+    "description": "A fictional fix for the bureaucracy that somehow needs another signature.",
+    "price": "54.95",
+    "quantity": 33,
+    "image": "products/demo-006.svg",
+    "is_active": true,
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "Coverage Compass",
+    "description": "Points toward the nearest in-network unicorn. Decorative, not medical.",
+    "price": "74.00",
+    "quantity": 12,
+    "image": "products/demo-007.svg",
+    "is_active": true,
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "name": "Formulary Flex",
+    "description": "The imaginary flexibility your formulary keeps promising.",
+    "price": "61.25",
+    "quantity": 21,
+    "image": "products/demo-008.svg",
+    "is_active": true,
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "name": "Placebo Deluxe",
+    "description": "Nothing active, everything expensive. A fictional collector's item.",
+    "price": "129.00",
+    "quantity": 35,
+    "image": "products/demo-009.svg",
+    "is_active": true,
+    "categories": [
+      3
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 10,
+  "fields": {
+    "name": "Confidence Capsules",
+    "description": "A glossy box of imaginary confidence with extra fine print.",
+    "price": "99.99",
+    "quantity": 24,
+    "image": "products/demo-010.svg",
+    "is_active": true,
+    "categories": [
+      3
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 11,
+  "fields": {
+    "name": "Miracle Maybe",
+    "description": "Results may vary because this product exists only in a parody shop.",
+    "price": "149.00",
+    "quantity": 16,
+    "image": "products/demo-011.svg",
+    "is_active": true,
+    "categories": [
+      3
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 12,
+  "fields": {
+    "name": "HopeSpray",
+    "description": "A fictional mist of optimism for the waiting room.",
+    "price": "47.00",
+    "quantity": 38,
+    "image": "products/demo-012.svg",
+    "is_active": true,
+    "categories": [
+      3
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 13,
+  "fields": {
+    "name": "Nothingol XR",
+    "description": "Extended release nothing, wrapped in an unusually confident carton.",
+    "price": "179.00",
+    "quantity": 11,
+    "image": "products/demo-013.svg",
+    "is_active": true,
+    "categories": [
+      3
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 14,
+  "fields": {
+    "name": "Expectation Tabs",
+    "description": "A pocket-sized reminder to read the whole imaginary label.",
+    "price": "32.00",
+    "quantity": 46,
+    "image": "products/demo-014.svg",
+    "is_active": true,
+    "categories": [
+      3
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 15,
+  "fields": {
+    "name": "Boardroom Bliss",
+    "description": "For fictional executives who schedule relaxation in fifteen-minute blocks.",
+    "price": "249.00",
+    "quantity": 8,
+    "image": "products/demo-015.svg",
+    "is_active": true,
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 16,
+  "fields": {
+    "name": "Stakeholder Serenity",
+    "description": "An imaginary calm amid an inbox full of quarterly forecasts.",
+    "price": "199.00",
+    "quantity": 14,
+    "image": "products/demo-016.svg",
+    "is_active": true,
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 17,
+  "fields": {
+    "name": "MarginMint",
+    "description": "A minty parody of the bottom line, with no actual active ingredient.",
+    "price": "119.00",
+    "quantity": 29,
+    "image": "products/demo-017.svg",
+    "is_active": true,
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 18,
+  "fields": {
+    "name": "Synergy Drops",
+    "description": "A fictional dropper for meetings that could have been an email.",
+    "price": "159.00",
+    "quantity": 17,
+    "image": "products/demo-018.svg",
+    "is_active": true,
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 19,
+  "fields": {
+    "name": "Executive Balance",
+    "description": "An imaginary formula for balancing a calendar with too many calls.",
+    "price": "229.00",
+    "quantity": 9,
+    "image": "products/demo-019.svg",
+    "is_active": true,
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 20,
+  "fields": {
+    "name": "Refillfinity",
+    "description": "The refill reminder that keeps coming back. Novelty product only.",
+    "price": "68.00",
+    "quantity": 31,
+    "image": "products/demo-020.svg",
+    "is_active": true,
+    "categories": [
+      5
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 21,
+  "fields": {
+    "name": "QueueLess",
+    "description": "Pretend to skip the line without actually going anywhere.",
+    "price": "44.00",
+    "quantity": 43,
+    "image": "products/demo-021.svg",
+    "is_active": true,
+    "categories": [
+      5
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 22,
+  "fields": {
+    "name": "Nocturna Nebula",
+    "description": "A dreamy sci-fi bottle for your nightstand, not a sleep aid.",
+    "price": "84.00",
+    "quantity": 22,
+    "image": "products/demo-022.svg",
+    "is_active": true,
+    "categories": [
+      5
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 23,
+  "fields": {
+    "name": "FocusForecast",
+    "description": "Predicts a productive afternoon with the accuracy of a weather app.",
+    "price": "72.00",
+    "quantity": 34,
+    "image": "products/demo-023.svg",
+    "is_active": true,
+    "categories": [
+      5
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 24,
+  "fields": {
+    "name": "Weekend Warranty",
+    "description": "An imaginary guarantee that Monday can wait a little longer.",
+    "price": "58.00",
+    "quantity": 26,
+    "image": "products/demo-024.svg",
+    "is_active": true,
+    "categories": [
+      5
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 25,
+  "fields": {
+    "name": "BrandGlow",
+    "description": "A radiant imaginary rebrand in one sleek tube.",
+    "price": "139.00",
+    "quantity": 20,
+    "image": "products/demo-025.svg",
+    "is_active": true,
+    "categories": [
+      6
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 26,
+  "fields": {
+    "name": "AdSpend Advance",
+    "description": "A satirical bottle with a very large marketing budget.",
+    "price": "189.00",
+    "quantity": 15,
+    "image": "products/demo-026.svg",
+    "is_active": true,
+    "categories": [
+      6
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 27,
+  "fields": {
+    "name": "FinePrint Forte",
+    "description": "Packaging that makes the tiny disclaimer the main event.",
+    "price": "95.00",
+    "quantity": 28,
+    "image": "products/demo-027.svg",
+    "is_active": true,
+    "categories": [
+      6
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 28,
+  "fields": {
+    "name": "PatentEver",
+    "description": "A fictional formula with an exceptionally long shelf life on paper.",
+    "price": "299.00",
+    "quantity": 7,
+    "image": "products/demo-028.svg",
+    "is_active": true,
+    "categories": [
+      6
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 29,
+  "fields": {
+    "name": "DataDose",
+    "description": "Algorithmically imagined and scientifically unavailable.",
+    "price": "109.00",
+    "quantity": 25,
+    "image": "products/demo-029.svg",
+    "is_active": true,
+    "categories": [
+      7
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 30,
+  "fields": {
+    "name": "Quantum Quarterly",
+    "description": "A speculative serum that exists in every quarter at once.",
+    "price": "329.00",
+    "quantity": 6,
+    "image": "products/demo-030.svg",
+    "is_active": true,
+    "categories": [
+      7
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 31,
+  "fields": {
+    "name": "Tomorrow Tonic",
+    "description": "The future of fictional wellness, bottled today.",
+    "price": "79.00",
+    "quantity": 37,
+    "image": "products/demo-031.svg",
+    "is_active": true,
+    "categories": [
+      7
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 32,
+  "fields": {
+    "name": "Labyrinth Labs",
+    "description": "An experimental-looking box with absolutely no experiment inside.",
+    "price": "159.00",
+    "quantity": 19,
+    "image": "products/demo-032.svg",
+    "is_active": true,
+    "categories": [
+      7
+    ]
+  }
+}
+]

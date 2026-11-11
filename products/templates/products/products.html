@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    {# Search + sort via GET params (?q=...&sort=price_asc|price_desc|stock). Backend filtering still needed. #}
+    {# Search and sort are handled by the catalog view. #}
     <form method="get" class="d-flex gap-2" role="search">
       <input type="search" name="q" class="form-control form-control-sm" placeholder="Search…"
              value="{{ request.GET.q }}" aria-label="Search products">
