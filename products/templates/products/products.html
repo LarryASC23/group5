@@ -27,16 +27,8 @@
   </div>
 
   {% if sections %}
-    <nav class="dm-category-jump d-flex flex-wrap gap-2 mb-4" aria-label="Shop categories">
-      {% for section in sections %}
-        <a href="#category-{% if section.category %}{{ section.category.name|slugify }}{% else %}other{% endif %}" class="dm-category-jump-link">
-          {{ section.category.name|default:"Other finds" }} <span>{{ section.products|length }}</span>
-        </a>
-      {% endfor %}
-    </nav>
-
     {% for section in sections %}
-      <section class="dm-category-section mb-5" id="category-{% if section.category %}{{ section.category.name|slugify }}{% else %}other{% endif %}" aria-labelledby="category-heading-{{ forloop.counter }}">
+      <section class="dm-category-section mb-5" aria-labelledby="category-heading-{{ forloop.counter }}">
         <div class="dm-category-heading d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-2 mb-3">
           <div>
             <p class="dm-mono small text-accent mb-1">// DEPARTMENT {{ forloop.counter|stringformat:"02d" }}</p>

@@ -243,22 +243,6 @@ h1, h2, h3, .dm-mono {
 }
 
 /* ---------- Category shelves ---------- */
-.dm-category-jump-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 1px solid var(--dm-border);
-  border-radius: 999px;
-  background: var(--dm-surface);
-  color: var(--dm-text);
-  padding: 0.38rem 0.75rem;
-  font-family: var(--dm-font-mono);
-  font-size: 0.75rem;
-  text-decoration: none;
-}
-.dm-category-jump-link span { color: var(--dm-accent); }
-.dm-category-jump-link:hover,
-.dm-category-jump-link:focus-visible { border-color: var(--dm-accent-dim); color: var(--dm-accent); }
 .dm-category-section { scroll-margin-top: 6rem; }
 .dm-category-heading {
   border-left: 3px solid var(--dm-accent);
