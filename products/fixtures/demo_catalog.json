@@ -1,162 +1,86 @@
 [
 {
   "model": "products.category",
-  "pk": 1,
+  "pk": 8,
   "fields": {
-    "name": "drug",
-    "description": "bad"
+    "name": "Questionable Props",
+    "description": "Odd display pieces with stories that never quite add up."
   }
 },
 {
   "model": "products.category",
-  "pk": 2,
+  "pk": 9,
   "fields": {
-    "name": "Paperwork Relief",
-    "description": "Parody products for the bureaucracy of modern care."
+    "name": "Unofficial Media",
+    "description": "Tapes, discs, and records from the stranger shelves."
   }
 },
 {
   "model": "products.category",
-  "pk": 3,
+  "pk": 10,
   "fields": {
-    "name": "Premium Placebos",
-    "description": "Imaginary remedies with premium packaging."
+    "name": "Backroom Hardware",
+    "description": "Useful looking objects with mysterious past lives."
   }
 },
 {
   "model": "products.category",
-  "pk": 4,
+  "pk": 11,
   "fields": {
-    "name": "Executive Wellness",
-    "description": "Fictional boardroom wellness essentials."
+    "name": "After Hours Finds",
+    "description": "Vintage bottles, arcade curios, and quiet botanical photos."
   }
 },
 {
   "model": "products.category",
-  "pk": 5,
+  "pk": 12,
   "fields": {
-    "name": "Lifestyle Rx",
-    "description": "Satirical everyday lifestyle products."
-  }
-},
-{
-  "model": "products.category",
-  "pk": 6,
-  "fields": {
-    "name": "Brand Therapy",
-    "description": "Imaginary products from the marketing department."
-  }
-},
-{
-  "model": "products.category",
-  "pk": 7,
-  "fields": {
-    "name": "Future Formulas",
-    "description": "Speculative science-fiction pharmacy goods."
-  }
-},
-{
-  "model": "products.product",
-  "pk": 1,
-  "fields": {
-    "name": "breaking bad methylamine",
-    "description": "bad pee",
-    "price": "100.00",
-    "quantity": 5,
-    "image": "products/demo-001.svg",
-    "is_active": true,
-    "categories": [
-      1
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 2,
-  "fields": {
-    "name": "meth",
-    "description": "rock candy",
-    "price": "50000.00",
-    "quantity": 6,
-    "image": "products/demo-002.svg",
-    "is_active": true,
-    "categories": [
-      1
-    ]
+    "name": "Curious Collectibles",
+    "description": "Evidence room energy, without the paperwork."
   }
 },
 {
   "model": "products.product",
   "pk": 3,
   "fields": {
-    "name": "CopayCalm",
-    "description": "A tiny bottle of patience for the moment you see the copay. Entirely fictional.",
-    "price": "39.99",
-    "quantity": 42,
-    "image": "products/demo-003.svg",
-    "is_active": true,
-    "categories": [
-      2
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 4,
-  "fields": {
-    "name": "PriorAuth Plus",
-    "description": "For the brave soul entering page seven of the approval form. Parody only.",
-    "price": "89.00",
-    "quantity": 18,
-    "image": "products/demo-004.svg",
-    "is_active": true,
-    "categories": [
-      2
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 5,
-  "fields": {
-    "name": "ClaimBalm",
-    "description": "A soothing imaginary balm for claims marked pending indefinitely.",
-    "price": "24.50",
-    "quantity": 27,
-    "image": "products/demo-005.svg",
-    "is_active": true,
-    "categories": [
-      2
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 6,
-  "fields": {
-    "name": "RedTape Relief",
-    "description": "A fictional fix for the bureaucracy that somehow needs another signature.",
-    "price": "54.95",
-    "quantity": 33,
-    "image": "products/demo-006.svg",
-    "is_active": true,
-    "categories": [
-      2
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 7,
-  "fields": {
-    "name": "Coverage Compass",
-    "description": "Points toward the nearest in-network unicorn. Decorative, not medical.",
-    "price": "74.00",
+    "name": "Banknote Evidence Photo",
+    "description": "A photo of suspect banknotes from a public evidence display. A class project curiosity, not currency.",
+    "price": "240.00",
     "quantity": 12,
-    "image": "products/demo-007.svg",
+    "image": "products/sourced-003.jpg",
     "is_active": true,
     "categories": [
-      2
+      8
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "name": "Replica Coin",
+    "description": "An old coin with a questionable pedigree. Display collectible for this parody catalog.",
+    "price": "80.00",
+    "quantity": 7,
+    "image": "products/sourced-004.jpg",
+    "is_active": true,
+    "categories": [
+      8
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "Unofficial DVD Stack",
+    "description": "A wobbly stack of discs with artwork that asks more questions than it answers.",
+    "price": "18.00",
+    "quantity": 42,
+    "image": "products/sourced-007.jpg",
+    "is_active": true,
+    "categories": [
+      9
     ]
   }
 },
@@ -164,14 +88,14 @@
   "model": "products.product",
   "pk": 8,
   "fields": {
-    "name": "Formulary Flex",
-    "description": "The imaginary flexibility your formulary keeps promising.",
-    "price": "61.25",
-    "quantity": 21,
-    "image": "products/demo-008.svg",
+    "name": "Dubious Cassette Tape",
+    "description": "An old cassette with a mysterious recording and no reliable track list.",
+    "price": "12.00",
+    "quantity": 35,
+    "image": "products/sourced-008.jpg",
     "is_active": true,
     "categories": [
-      2
+      9
     ]
   }
 },
@@ -179,44 +103,14 @@
   "model": "products.product",
   "pk": 9,
   "fields": {
-    "name": "Placebo Deluxe",
-    "description": "Nothing active, everything expensive. A fictional collector's item.",
-    "price": "129.00",
-    "quantity": 35,
-    "image": "products/demo-009.svg",
+    "name": "Unofficial Vinyl Record",
+    "description": "An unusual pressing with more mystery than liner notes.",
+    "price": "55.00",
+    "quantity": 10,
+    "image": "products/sourced-009.jpg",
     "is_active": true,
     "categories": [
-      3
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 10,
-  "fields": {
-    "name": "Confidence Capsules",
-    "description": "A glossy box of imaginary confidence with extra fine print.",
-    "price": "99.99",
-    "quantity": 24,
-    "image": "products/demo-010.svg",
-    "is_active": true,
-    "categories": [
-      3
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 11,
-  "fields": {
-    "name": "Miracle Maybe",
-    "description": "Results may vary because this product exists only in a parody shop.",
-    "price": "149.00",
-    "quantity": 16,
-    "image": "products/demo-011.svg",
-    "is_active": true,
-    "categories": [
-      3
+      9
     ]
   }
 },
@@ -224,89 +118,14 @@
   "model": "products.product",
   "pk": 12,
   "fields": {
-    "name": "HopeSpray",
-    "description": "A fictional mist of optimism for the waiting room.",
-    "price": "47.00",
-    "quantity": 38,
-    "image": "products/demo-012.svg",
+    "name": "Skeleton Key",
+    "description": "An antique key that looks like it has heard every secret in the building.",
+    "price": "39.00",
+    "quantity": 18,
+    "image": "products/sourced-012.jpg",
     "is_active": true,
     "categories": [
-      3
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 13,
-  "fields": {
-    "name": "Nothingol XR",
-    "description": "Extended release nothing, wrapped in an unusually confident carton.",
-    "price": "179.00",
-    "quantity": 11,
-    "image": "products/demo-013.svg",
-    "is_active": true,
-    "categories": [
-      3
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 14,
-  "fields": {
-    "name": "Expectation Tabs",
-    "description": "A pocket-sized reminder to read the whole imaginary label.",
-    "price": "32.00",
-    "quantity": 46,
-    "image": "products/demo-014.svg",
-    "is_active": true,
-    "categories": [
-      3
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 15,
-  "fields": {
-    "name": "Boardroom Bliss",
-    "description": "For fictional executives who schedule relaxation in fifteen-minute blocks.",
-    "price": "249.00",
-    "quantity": 8,
-    "image": "products/demo-015.svg",
-    "is_active": true,
-    "categories": [
-      4
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 16,
-  "fields": {
-    "name": "Stakeholder Serenity",
-    "description": "An imaginary calm amid an inbox full of quarterly forecasts.",
-    "price": "199.00",
-    "quantity": 14,
-    "image": "products/demo-016.svg",
-    "is_active": true,
-    "categories": [
-      4
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 17,
-  "fields": {
-    "name": "MarginMint",
-    "description": "A minty parody of the bottom line, with no actual active ingredient.",
-    "price": "119.00",
-    "quantity": 29,
-    "image": "products/demo-017.svg",
-    "is_active": true,
-    "categories": [
-      4
+      10
     ]
   }
 },
@@ -314,44 +133,14 @@
   "model": "products.product",
   "pk": 18,
   "fields": {
-    "name": "Synergy Drops",
-    "description": "A fictional dropper for meetings that could have been an email.",
-    "price": "159.00",
-    "quantity": 17,
-    "image": "products/demo-018.svg",
+    "name": "Vintage Absinthe Bottle",
+    "description": "A green bottle with an unusually long history of raised eyebrows.",
+    "price": "86.00",
+    "quantity": 12,
+    "image": "products/sourced-018.jpg",
     "is_active": true,
     "categories": [
-      4
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 19,
-  "fields": {
-    "name": "Executive Balance",
-    "description": "An imaginary formula for balancing a calendar with too many calls.",
-    "price": "229.00",
-    "quantity": 9,
-    "image": "products/demo-019.svg",
-    "is_active": true,
-    "categories": [
-      4
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 20,
-  "fields": {
-    "name": "Refillfinity",
-    "description": "The refill reminder that keeps coming back. Novelty product only.",
-    "price": "68.00",
-    "quantity": 31,
-    "image": "products/demo-020.svg",
-    "is_active": true,
-    "categories": [
-      5
+      11
     ]
   }
 },
@@ -359,14 +148,14 @@
   "model": "products.product",
   "pk": 21,
   "fields": {
-    "name": "QueueLess",
-    "description": "Pretend to skip the line without actually going anywhere.",
-    "price": "44.00",
-    "quantity": 43,
-    "image": "products/demo-021.svg",
+    "name": "Antique Handcuffs",
+    "description": "A pair of old cuffs that belongs in a museum display.",
+    "price": "75.00",
+    "quantity": 11,
+    "image": "products/sourced-021.jpg",
     "is_active": true,
     "categories": [
-      5
+      12
     ]
   }
 },
@@ -374,14 +163,14 @@
   "model": "products.product",
   "pk": 22,
   "fields": {
-    "name": "Nocturna Nebula",
-    "description": "A dreamy sci-fi bottle for your nightstand, not a sleep aid.",
-    "price": "84.00",
-    "quantity": 22,
-    "image": "products/demo-022.svg",
+    "name": "Unofficial Radio Balloon",
+    "description": "A photographed balloon radio project with a truly improvised setup.",
+    "price": "175.00",
+    "quantity": 4,
+    "image": "products/sourced-022.jpg",
     "is_active": true,
     "categories": [
-      5
+      12
     ]
   }
 },
@@ -389,14 +178,14 @@
   "model": "products.product",
   "pk": 23,
   "fields": {
-    "name": "FocusForecast",
-    "description": "Predicts a productive afternoon with the accuracy of a weather app.",
-    "price": "72.00",
-    "quantity": 34,
-    "image": "products/demo-023.svg",
+    "name": "Questionable Label Exhibit",
+    "description": "A photo of a market display where the labels are trying a little too hard.",
+    "price": "80.00",
+    "quantity": 13,
+    "image": "products/sourced-023.jpg",
     "is_active": true,
     "categories": [
-      5
+      8
     ]
   }
 },
@@ -404,14 +193,14 @@
   "model": "products.product",
   "pk": 24,
   "fields": {
-    "name": "Weekend Warranty",
-    "description": "An imaginary guarantee that Monday can wait a little longer.",
-    "price": "58.00",
-    "quantity": 26,
-    "image": "products/demo-024.svg",
+    "name": "Loaded Dice",
+    "description": "A pair of dice with a reputation that precedes the roll.",
+    "price": "35.00",
+    "quantity": 22,
+    "image": "products/sourced-024.jpg",
     "is_active": true,
     "categories": [
-      5
+      12
     ]
   }
 },
@@ -419,14 +208,14 @@
   "model": "products.product",
   "pk": 25,
   "fields": {
-    "name": "BrandGlow",
-    "description": "A radiant imaginary rebrand in one sleek tube.",
-    "price": "139.00",
-    "quantity": 20,
-    "image": "products/demo-025.svg",
+    "name": "Vintage Slot Machine",
+    "description": "An old arcade floor machine with plenty of after hours character.",
+    "price": "210.00",
+    "quantity": 5,
+    "image": "products/sourced-025.jpg",
     "is_active": true,
     "categories": [
-      6
+      11
     ]
   }
 },
@@ -434,29 +223,14 @@
   "model": "products.product",
   "pk": 26,
   "fields": {
-    "name": "AdSpend Advance",
-    "description": "A satirical bottle with a very large marketing budget.",
-    "price": "189.00",
-    "quantity": 15,
-    "image": "products/demo-026.svg",
+    "name": "Hemp Field Print",
+    "description": "A quiet landscape photo of a freshly mown hemp field near Hayfield Green.",
+    "price": "45.00",
+    "quantity": 30,
+    "image": "products/sourced-026.jpg",
     "is_active": true,
     "categories": [
-      6
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 27,
-  "fields": {
-    "name": "FinePrint Forte",
-    "description": "Packaging that makes the tiny disclaimer the main event.",
-    "price": "95.00",
-    "quantity": 28,
-    "image": "products/demo-027.svg",
-    "is_active": true,
-    "categories": [
-      6
+      11
     ]
   }
 },
@@ -464,14 +238,14 @@
   "model": "products.product",
   "pk": 28,
   "fields": {
-    "name": "PatentEver",
-    "description": "A fictional formula with an exceptionally long shelf life on paper.",
-    "price": "299.00",
-    "quantity": 7,
-    "image": "products/demo-028.svg",
+    "name": "Poppy Botanical Print",
+    "description": "A botanical photograph for the shop's most suspicious flower aisle.",
+    "price": "29.00",
+    "quantity": 21,
+    "image": "products/sourced-028.jpg",
     "is_active": true,
     "categories": [
-      6
+      12
     ]
   }
 },
@@ -479,14 +253,14 @@
   "model": "products.product",
   "pk": 29,
   "fields": {
-    "name": "DataDose",
-    "description": "Algorithmically imagined and scientifically unavailable.",
-    "price": "109.00",
-    "quantity": 25,
-    "image": "products/demo-029.svg",
+    "name": "Traffic Cone",
+    "description": "One orange cone with an uncertain chain of custody.",
+    "price": "20.00",
+    "quantity": 47,
+    "image": "products/sourced-029.jpg",
     "is_active": true,
     "categories": [
-      7
+      10
     ]
   }
 },
@@ -494,29 +268,14 @@
   "model": "products.product",
   "pk": 30,
   "fields": {
-    "name": "Quantum Quarterly",
-    "description": "A speculative serum that exists in every quarter at once.",
-    "price": "329.00",
-    "quantity": 6,
-    "image": "products/demo-030.svg",
+    "name": "Stop Sign",
+    "description": "A roadside classic presented as a found object in this parody catalog.",
+    "price": "50.00",
+    "quantity": 12,
+    "image": "products/sourced-030.jpg",
     "is_active": true,
     "categories": [
-      7
-    ]
-  }
-},
-{
-  "model": "products.product",
-  "pk": 31,
-  "fields": {
-    "name": "Tomorrow Tonic",
-    "description": "The future of fictional wellness, bottled today.",
-    "price": "79.00",
-    "quantity": 37,
-    "image": "products/demo-031.svg",
-    "is_active": true,
-    "categories": [
-      7
+      10
     ]
   }
 },
@@ -524,14 +283,45 @@
   "model": "products.product",
   "pk": 32,
   "fields": {
-    "name": "Labyrinth Labs",
-    "description": "An experimental-looking box with absolutely no experiment inside.",
-    "price": "159.00",
-    "quantity": 19,
-    "image": "products/demo-032.svg",
+    "name": "Mystery Shoe Stall",
+    "description": "A photographed market stall with a very uncertain origin story.",
+    "price": "75.00",
+    "quantity": 14,
+    "image": "products/sourced-032.jpg",
     "is_active": true,
     "categories": [
-      7
+      8
+    ]
+  }
+},
+{
+  "model": "products.sale",
+  "pk": 2,
+  "fields": {
+    "name": "After Hours 20% Sale",
+    "discount_type": "percentage",
+    "discount_value": "20.00",
+    "start_date": "2026-11-10T00:00:00Z",
+    "end_date": "2027-12-31T23:59:00Z",
+    "active": true,
+    "products": [
+      3,
+      4,
+      7,
+      8,
+      9,
+      12,
+      18,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      28,
+      29,
+      30,
+      32
     ]
   }
 }

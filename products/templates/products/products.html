@@ -6,42 +6,62 @@
 <section class="container py-4">
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
     <div>
+      <p class="dm-mono text-accent small mb-2">&gt;_ browse --all</p>
       <h1 class="h3 mb-1">The shop</h1>
       <p class="text-muted small mb-0">
-        {% if request.GET.q %}Results for "<span class="text-accent">{{ request.GET.q }}</span>"{% else %}Everything currently on the shelf{% endif %}
+        {% if request.GET.q %}Results for "<span class="text-accent">{{ request.GET.q }}</span>"{% else %}Browse the shelves by department{% endif %}
       </p>
     </div>
 
-    {# Search and sort are handled by the catalog view. #}
     <form method="get" class="d-flex gap-2" role="search">
-      <input type="search" name="q" class="form-control form-control-sm" placeholder="Search…"
+      <input type="search" name="q" class="form-control form-control-sm" placeholder="Search..."
              value="{{ request.GET.q }}" aria-label="Search products">
       <select name="sort" class="form-select form-select-sm" aria-label="Sort products" onchange="this.form.submit()">
         <option value="" {% if not request.GET.sort %}selected{% endif %}>Sort: default</option>
-        <option value="price_asc"  {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: low → high</option>
-        <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: high → low</option>
-        <option value="stock"      {% if request.GET.sort == 'stock' %}selected{% endif %}>Availability</option>
+        <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: low to high</option>
+        <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: high to low</option>
+        <option value="stock" {% if request.GET.sort == 'stock' %}selected{% endif %}>Availability</option>
       </select>
       <button type="submit" class="btn btn-sm btn-accent">Go</button>
     </form>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
-    {% for product in products %}
-      <div class="col">{% include "partials/_product_card.html" with product=product %}</div>
-    {% empty %}
-      <div class="col-12">
-        <div class="dm-empty">
-          <div class="dm-empty-icon">404_stash_not_found</div>
-          {% if request.GET.q %}
-            <p class="mb-3">Nothing matches "{{ request.GET.q }}". Try another search.</p>
-            <a href="/products/" class="btn btn-outline-accent btn-sm">Clear search</a>
-          {% else %}
-            <p class="mb-0">No products yet. Check back after the next shipment.</p>
-          {% endif %}
+  {% if sections %}
+    <nav class="dm-category-jump d-flex flex-wrap gap-2 mb-4" aria-label="Shop categories">
+      {% for section in sections %}
+        <a href="#category-{% if section.category %}{{ section.category.name|slugify }}{% else %}other{% endif %}" class="dm-category-jump-link">
+          {{ section.category.name|default:"Other finds" }} <span>{{ section.products|length }}</span>
+        </a>
+      {% endfor %}
+    </nav>
+
+    {% for section in sections %}
+      <section class="dm-category-section mb-5" id="category-{% if section.category %}{{ section.category.name|slugify }}{% else %}other{% endif %}" aria-labelledby="category-heading-{{ forloop.counter }}">
+        <div class="dm-category-heading d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-2 mb-3">
+          <div>
+            <p class="dm-mono small text-accent mb-1">// DEPARTMENT {{ forloop.counter|stringformat:"02d" }}</p>
+            <h2 id="category-heading-{{ forloop.counter }}" class="h4 mb-1">{{ section.category.name|default:"Other finds" }}</h2>
+            {% if section.category.description %}<p class="text-muted small mb-0">{{ section.category.description }}</p>{% endif %}
+          </div>
+          <span class="dm-mono small text-muted">{{ section.products|length }} listing{{ section.products|length|pluralize }}</span>
         </div>
-      </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
+          {% for product in section.products %}
+            <div class="col">{% include "partials/_product_card.html" with product=product %}</div>
+          {% endfor %}
+        </div>
+      </section>
     {% endfor %}
-  </div>
+  {% else %}
+    <div class="dm-empty">
+      <div class="dm-empty-icon">404_stash_not_found</div>
+      {% if request.GET.q %}
+        <p class="mb-3">Nothing matches "{{ request.GET.q }}". Try another search.</p>
+        <a href="{% url 'products:list' %}" class="btn btn-outline-accent btn-sm">Clear search</a>
+      {% else %}
+        <p class="mb-0">No products yet. Check back after the next shipment.</p>
+      {% endif %}
+    </div>
+  {% endif %}
 </section>
 {% endblock %}

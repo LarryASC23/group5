@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage), #this line maps the root URL to the homepage view function in views.py
     path('about/', views.about), #this line maps the 'about/' URL to the about view function in views.py
+    path('image-credits/', views.image_credits, name='image_credits'),
     path('products/', include('products.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

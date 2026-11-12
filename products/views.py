@@ -1,7 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
-from .models import Product
+from .models import Category, Product
+from .promotions import current_store_sale
 
 
 def products(request):
@@ -22,7 +23,24 @@ def products(request):
         products = queryset.order_by("-quantity", "name")
     else:
         products = queryset.order_by("name")
-    return render(request, "products/products.html", {"products": products})
+    grouped = {}
+    for product in products:
+        categories = list(product.categories.all())
+        category = min(categories, key=lambda item: item.name) if categories else None
+        key = category.pk if category else None
+        grouped.setdefault(key, []).append(product)
+
+    category_ids = [key for key in grouped if key is not None]
+    sections = [
+        {"category": category, "products": grouped[category.pk]}
+        for category in Category.objects.filter(pk__in=category_ids).order_by("name")
+    ]
+    if None in grouped:
+        sections.append({"category": None, "products": grouped[None]})
+    return render(request, "products/products.html", {
+        "sections": sections,
+        "site_sale": current_store_sale(),
+    })
 
 
 def product_detail(request, pk):

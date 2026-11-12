@@ -1,0 +1,8 @@
+<aside class="dm-sale-banner" aria-label="Current sitewide sale">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center gap-2 gap-md-4 py-2">
+    <span class="dm-sale-banner-tag">// AFTER HOURS DEAL</span>
+    <span class="dm-sale-banner-message"><strong>{{ site_sale.discount_value|floatformat:0 }}% off</strong> the whole public catalog</span>
+    <span class="dm-sale-banner-end">Ends {{ site_sale.end_date|date:"M j, Y" }}</span>
+    <a href="{% url 'products:list' %}" class="dm-sale-banner-link">Browse the drop <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</aside>

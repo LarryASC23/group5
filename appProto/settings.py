@@ -11,21 +11,20 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--1sn90y&m@gk@q8&==*1e&4telqvs8jt^!mu$2q_0u7u2cwq%u'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-local-demo-only")
+if not DEBUG and "DJANGO_SECRET_KEY" not in os.environ:
+    raise ImproperlyConfigured("Set DJANGO_SECRET_KEY when DJANGO_DEBUG=False.")
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",") if host.strip()]
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 
 
 # Media Storage Definition
@@ -123,8 +122,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/account/'

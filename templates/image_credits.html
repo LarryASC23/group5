@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Image credits{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="max-width: 52rem;">
+  <p class="dm-mono small text-accent mb-2">&gt;_ sources</p>
+  <h1 class="h3 mb-3">Image credits</h1>
+  <p class="text-muted">Product images are sourced from the creators below. The files are used without visual edits. This storefront is a parody demo.</p>
+  <ul class="list-unstyled">
+    {% for source in sources %}
+      <li class="py-3 border-bottom">
+        <strong>{{ source.product_name }}</strong><br>
+        <a href="{{ source.source_page }}" target="_blank" rel="noopener noreferrer">{{ source.source_title }}</a>
+        by {{ source.creator|default:"Unknown creator" }}
+        · <a href="{{ source.license_url }}" target="_blank" rel="noopener noreferrer">{{ source.license_label }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
